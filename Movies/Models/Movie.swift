@@ -8,42 +8,28 @@
 
 import Foundation
 
-/*
- {
- "vote_count": 771,
- "id": 429617,
- "video": false,
- "vote_average": 7.8,
- "title": "Spider-Man: Far from Home",
- "popularity": 615.274,
- "poster_path": "/rjbNpRMoVvqHmhmksbokcyCr7wn.jpg",
- "original_language": "en",
- "original_title": "Spider-Man: Far from Home",
- "genre_ids": [
- 28,
- 12,
- 878
- ],
- "backdrop_path": "/dihW2yTsvQlust7mSuAqJDtqW7k.jpg",
- "adult": false,
- "overview": "Peter Parker and his friends go on a summer trip to Europe. However, they will hardly be able to rest - Peter will have to agree to help Nick Fury uncover the mystery of creatures that cause natural disasters and destruction throughout the continent.",
- "release_date": "2019-06-28"
- }
- */
+private let baseURL = "https://image.tmdb.org/t/p/"
+private let imageSize = "w200/"
 
 struct Movie {
-    var id: Int
-    var title: String
-    var poster: String?
-    var overview: String
-//    var releaseDate: Date
+    fileprivate(set) var id: Int
+    fileprivate(set) var title: String
+    fileprivate(set) var poster: String?
+    fileprivate(set) var overview: String
+    
+    var imageURL: URL? {
+        var url: URL?
+        if let posterPath = self.poster {
+            url = URL(fileURLWithPath: baseURL + imageSize + posterPath)
+        }
+        return url
+    }
     
     enum MovieCodingKey: String, CodingKey {
         case id
         case title
         case poster = "poster_path"
         case overview
-//        case releaseDate = "release_date"
     }
 }
 
@@ -54,6 +40,5 @@ extension Movie: Decodable {
         title = try container.decode(String.self, forKey: .title)
         poster = try container.decode(String.self, forKey: .poster)
         overview = try container.decode(String.self, forKey: .overview)
-//        releaseDate = try container.decode(Date.self, forKey: .releaseDate)
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 struct MovieList {
-    var movies: [Movie]
+    fileprivate(set) var movies: [Movie]
     
     enum CodingKeys: String, CodingKey {
         case movies = "results"
