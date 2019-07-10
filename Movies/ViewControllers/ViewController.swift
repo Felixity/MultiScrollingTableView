@@ -40,22 +40,28 @@ class ViewController: UIViewController {
     }
     
     private func createMoviesSection() {
-        NetworkRequest().sharedInstance?.fetchUpcomingMovies(for: 1, "en-US", success: { [weak self] (movies) in
+        NetworkRequest().sharedInstance?.fetchUpcomingMovies(for: 1, "en-US", success: { [weak self] (movies, totalPages) in
             guard let self = self else { return }
-            self.sections.append(MoviesSection(movies: movies))
+            self.sections.append(MoviesSection(movies: movies, totalPages: totalPages))
+            self.hasMorePages = (self.currentPage >= totalPages) ? false : true
+            self.currentPage += 1
             self.setupTableView()
             }, failure: { (error) in
                 print(error.localizedDescription)
         })
     }
     
-    private func loadMoreMovies(for page: Int) {
-        NetworkRequest().sharedInstance?.fetchUpcomingMovies(for: page, "en-US", success: { [weak self] (movies) in
+    private func loadMoreMovies() {
+        isFetchInProgress = true
+        NetworkRequest().sharedInstance?.fetchUpcomingMovies(for: currentPage, "en-US", success: { [weak self] (movies, _) in
             guard let self = self else { return }
             if var moviesSection = self.sections[1] as? MoviesSection {
                 moviesSection.appendMovies(movies: movies)
                 self.sections[1] = moviesSection
                 self.tableView.reloadData()
+                self.hasMorePages = (self.currentPage >= moviesSection.totalPages) ? false : true
+                self.currentPage += 1
+                self.isFetchInProgress = false
             }
             }, failure: { (error) in
                 print(error.localizedDescription)
@@ -85,6 +91,7 @@ extension ViewController: UITableViewDataSource {
         
         if let newCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? BaseTableViewCell {
             newCell.configureCell(with: sections[indexPath.section])
+            (newCell as? MoviesTableViewCell)?.delegate = self
             cell = newCell
         }
         
@@ -99,5 +106,13 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return sections[indexPath.section].height
+    }
+}
+
+extension ViewController: MoviesTableViewCellDelegate {
+    func userDidFinishScrolling(for cell: MoviesTableViewCell) {
+        if hasMorePages && !isFetchInProgress {
+            loadMoreMovies()
+        }
     }
 }

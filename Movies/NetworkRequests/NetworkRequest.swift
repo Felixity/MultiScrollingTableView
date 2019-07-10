@@ -30,19 +30,19 @@ class NetworkRequest {
         return _sharedInstance ?? NetworkRequest()
     }
     
-    func fetchUpcomingMovies(for page: Int, _ language: String, success: @escaping ([Movie]) -> (), failure: @escaping (Error) -> ()) {
+    func fetchUpcomingMovies(for page: Int, _ language: String, success: @escaping ([Movie], Int) -> (), failure: @escaping (Error) -> ()) {
         fetchMovies(from: Endpoint.upcoming.rawValue, for: page, language, success: success, failure: failure)
     }
     
-    func fetchNowPlayingMovies(for page: Int, _ language: String, success: @escaping ([Movie]) -> (), failure: @escaping (Error) -> ()) {
+    func fetchNowPlayingMovies(for page: Int, _ language: String, success: @escaping ([Movie], Int) -> (), failure: @escaping (Error) -> ()) {
         fetchMovies(from: Endpoint.nowPlaying.rawValue, for: page, language, success: success, failure: failure)
     }
 
-    func fetchTopRatedMovies(for page: Int, _ language: String, success: @escaping ([Movie]) -> (), failure: @escaping (Error) -> ()) {
+    func fetchTopRatedMovies(for page: Int, _ language: String, success: @escaping ([Movie], Int) -> (), failure: @escaping (Error) -> ()) {
         fetchMovies(from: Endpoint.topRated.rawValue, for: page, language, success: success, failure: failure)
     }
 
-    private func fetchMovies(from endpoint: String, for page: Int, _ language: String, success: @escaping ([Movie]) -> (), failure: @escaping (Error) -> ()) {
+    private func fetchMovies(from endpoint: String, for page: Int, _ language: String, success: @escaping ([Movie], Int) -> (), failure: @escaping (Error) -> ()) {
         let url = baseURL + endpoint
         
         let params: [String: Any] = [
@@ -54,7 +54,7 @@ class NetworkRequest {
         AF.request(url, method: .get, parameters: params).responseDecodable { (response: DataResponse<MovieList>) in
             switch response.result {
             case .success(let movies):
-                success(movies.movies)
+                success(movies.movies, movies.totalPages)
             case .failure(let error):
                 failure(error)
             }

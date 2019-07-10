@@ -8,11 +8,18 @@
 
 import UIKit
 
+protocol MoviesTableViewCellDelegate: class {
+    func userDidFinishScrolling(for cell: MoviesTableViewCell)
+}
+
 class MoviesTableViewCell: BaseTableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    weak var delegate: MoviesTableViewCellDelegate?
+    
     private var movies: [Movie] = []
+    private var shouldLoadMoreData = true
     
     private let space: CGFloat = 10
     
@@ -24,6 +31,7 @@ class MoviesTableViewCell: BaseTableViewCell {
     override func configureCell(with any: Any) {
         if let moviesSection = any as? MoviesSection {
             self.movies = moviesSection.movies
+            self.shouldLoadMoreData = moviesSection.shouldLoadMoreData
             collectionView.reloadData()
         }
     }
@@ -53,7 +61,10 @@ extension MoviesTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
+        if shouldLoadMoreData && (indexPath.row > movies.count - 5) {
+            // ask for more data
+            delegate?.userDidFinishScrolling(for: self)
+        }
     }
 }
 

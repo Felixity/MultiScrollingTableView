@@ -62,11 +62,16 @@ struct MoviesSection: Section {
         return UIScreen.main.bounds.height - 126.0
     }
 
+    var shouldLoadMoreData = true
+    
+    var totalPages: Int
+    
     mutating func appendMovies(movies: [Movie]) {
         self.movies += movies
     }
     
-    init(movies: [Movie]) {
+    init(movies: [Movie], totalPages: Int) {
         self.movies = movies
+        self.totalPages = totalPages
     }
 }
