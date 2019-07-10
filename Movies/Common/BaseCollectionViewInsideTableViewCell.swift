@@ -1,5 +1,5 @@
 //
-//  BaseTableViewCell.swift
+//  BaseCollectionViewInsideTableViewCell.swift
 //  Movies
 //
 //  Created by Laura on 7/9/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseTableViewCell: UITableViewCell {
+class BaseCollectionViewInsideTableViewCell: UITableViewCell {
 
     private var cards: [Card]?
     private var space: CGFloat = 0.0
@@ -29,7 +29,7 @@ class BaseTableViewCell: UITableViewCell {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout -
-extension BaseTableViewCell: UICollectionViewDelegateFlowLayout
+extension BaseCollectionViewInsideTableViewCell: UICollectionViewDelegateFlowLayout
 {
     // set cell's size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize

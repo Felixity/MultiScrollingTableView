@@ -12,7 +12,7 @@ protocol FiltersTableViewCellDelegate: class {
     func userDidSelectFilter(_ filter: FilterType, for cell: FiltersTableViewCell)
 }
 
-class FiltersTableViewCell: BaseTableViewCell {
+class FiltersTableViewCell: BaseCollectionViewInsideTableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     

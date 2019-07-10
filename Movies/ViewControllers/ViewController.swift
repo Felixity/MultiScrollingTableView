@@ -89,7 +89,7 @@ extension ViewController: UITableViewDataSource {
             cellIdentifier = MoviesTableViewCell.getIdentifier()
         }
         
-        if let newCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? BaseTableViewCell {
+        if let newCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? BaseCollectionViewInsideTableViewCell {
             newCell.configureCell(with: sections[indexPath.section])
             (newCell as? MoviesTableViewCell)?.delegate = self
             cell = newCell

@@ -12,7 +12,7 @@ protocol MoviesTableViewCellDelegate: class {
     func userDidFinishScrolling(for cell: MoviesTableViewCell)
 }
 
-class MoviesTableViewCell: BaseTableViewCell {
+class MoviesTableViewCell: BaseCollectionViewInsideTableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
