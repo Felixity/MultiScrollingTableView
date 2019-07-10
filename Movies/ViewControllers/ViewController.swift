@@ -61,20 +61,16 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        print("here number of sections",sections.count)
         return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("here number of rows in section",section, sections[section].rowCount)
         return sections[section].rowCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell?
         var cellIdentifier = ""
-        
-        print("here cellForRow for section",indexPath.section,"row",indexPath.row)
         
         switch sections[indexPath.section].type {
         case .filters:
