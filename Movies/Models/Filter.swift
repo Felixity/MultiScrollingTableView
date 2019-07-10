@@ -9,7 +9,14 @@
 import Foundation
 import UIKit
 
+enum FilterType {
+    case upcoming
+    case nowPlaying
+    case topRated
+}
+
 struct Filter {
     var name: String
     var color: UIColor
+    var type: FilterType
 }

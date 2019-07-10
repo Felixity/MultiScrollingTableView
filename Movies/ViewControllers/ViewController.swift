@@ -116,3 +116,9 @@ extension ViewController: MoviesTableViewCellDelegate {
         }
     }
 }
+
+extension ViewController: FiltersTableViewCellDelegate {
+    func userDidSelectFilter(_ filter: FilterType, for cell: FiltersTableViewCell) {
+        
+    }
+}

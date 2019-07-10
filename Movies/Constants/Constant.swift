@@ -10,8 +10,8 @@ import Foundation
 
 struct Constant {
     static let filters = [
-        Filter(name: "Upcoming", color: .green),
-        Filter(name: "Now Playing", color: .orange),
-        Filter(name: "Top Rated", color: .yellow)
+        Filter(name: "Upcoming", color: .green, type: FilterType.upcoming),
+        Filter(name: "Now Playing", color: .orange, type: FilterType.nowPlaying),
+        Filter(name: "Top Rated", color: .yellow, type: FilterType.topRated)
     ]
 }

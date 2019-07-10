@@ -13,10 +13,12 @@ class FilterCollectionViewCell: BaseCollectionViewCell {
 
     @IBOutlet weak var filterButton: UIButton!
     
+    private var filter: Filter?
     private let space: CGFloat = 10.0
     
     override func configureCell(with anyData: Any?) {
         if let filter = anyData as? Filter {
+            self.filter = filter
             filterButton.setTitle(filter.name, for: .normal)
             filterButton.backgroundColor = filter.color
             filterButton.layer.cornerRadius = 8
@@ -24,6 +26,4 @@ class FilterCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    @IBAction func onFilterPress(_ sender: UIButton) {
-    }
 }

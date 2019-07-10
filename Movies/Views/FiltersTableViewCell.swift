@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol FiltersTableViewCellDelegate: class {
+    func userDidSelectFilter(_ filter: FilterType, for cell: FiltersTableViewCell)
+}
+
 class FiltersTableViewCell: BaseTableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    weak var delegate: FiltersTableViewCellDelegate?
     
     private var filters: [Filter] = []
     
@@ -52,6 +58,10 @@ extension FiltersTableViewCell: UICollectionViewDataSource {
         }
         
         return cell ?? UICollectionViewCell(frame: CGRect.zero)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.userDidSelectFilter(filters[indexPath.row].type, for: self)
     }
 }
 
