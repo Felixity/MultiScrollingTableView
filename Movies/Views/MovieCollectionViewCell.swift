@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+import AlamofireImage
 
 class MovieCollectionViewCell: BaseCollectionViewCell {
 
@@ -21,6 +21,7 @@ class MovieCollectionViewCell: BaseCollectionViewCell {
             titleLabel.text = nil
             
             // download image
+            
             print(movie.imageURL?.absoluteString)
             titleLabel.text = movie.title
         }

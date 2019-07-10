@@ -14,8 +14,6 @@ class MoviesTableViewCell: BaseTableViewCell {
     
     private var movies: [Movie] = []
     
-    lazy private var cardWidth = (collectionView.bounds.width - 4 * 10) / 3
-    lazy private var cardHeight = (collectionView.bounds.height - 3 * 10) / 2
     private let space: CGFloat = 10
     
     override func awakeFromNib() {
@@ -64,7 +62,10 @@ extension MoviesTableViewCell: UICollectionViewDelegateFlowLayout
 {
     // set cell's size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-    {        
+    {
+        let cardWidth = Int((collectionView.bounds.width - 4 * 10) / 3)
+        let cardHeight = Int((collectionView.bounds.height - 3 * 10) / 2)
+
         return CGSize(width: cardWidth, height: cardHeight)
     }
     

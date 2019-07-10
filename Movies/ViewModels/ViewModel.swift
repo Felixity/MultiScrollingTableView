@@ -59,7 +59,7 @@ struct MoviesSection: Section {
     var movies = [Movie]()
     
     var height: CGFloat {
-        return 600.0
+        return UIScreen.main.bounds.height - 126.0
     }
 
     mutating func appendMovies(movies: [Movie]) {
