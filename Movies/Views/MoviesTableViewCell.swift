@@ -18,7 +18,14 @@ class MoviesTableViewCell: BaseTableViewCell {
     
     weak var delegate: MoviesTableViewCellDelegate?
     
-    private var movies: [Movie] = []
+    private var movies: [Movie] = [] {
+        didSet {
+            let cardWidth: CGFloat = CGFloat(Int((UIScreen.main.bounds.width - 4 * 10) / 3))
+            let cardHeight: CGFloat = 300.0
+            let cards = Array(repeating: Card(width: cardWidth, height: cardHeight), count: movies.count)
+            setupGrid(with: cards, space)
+        }
+    }
     private var shouldLoadMoreData = true
     
     private let space: CGFloat = 10
@@ -65,36 +72,5 @@ extension MoviesTableViewCell: UICollectionViewDataSource {
             // ask for more data
             delegate?.userDidFinishScrolling(for: self)
         }
-    }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout -
-extension MoviesTableViewCell: UICollectionViewDelegateFlowLayout
-{
-    // set cell's size
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
-        let cardWidth = Int((collectionView.bounds.width - 4 * 10) / 3)
-        let cardHeight = 300 //Int((collectionView.bounds.height - 3 * 10) / 2)
-
-        return CGSize(width: cardWidth, height: cardHeight)
-    }
-    
-    // set collection view's margins
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
-    {
-        return UIEdgeInsets(top: space, left: space, bottom: space, right: space)
-    }
-    
-    // set vertical padding
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
-    {
-        return space
-    }
-    
-    // set horizontal padding
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
-    {
-        return space
     }
 }

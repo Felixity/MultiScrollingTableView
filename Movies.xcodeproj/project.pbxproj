@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,6 +29,7 @@
 		D3B8116522D3FEDB00F0926E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B8116422D3FEDB00F0926E /* Filter.swift */; };
 		D3B8116822D4CFD800F0926E /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B8116722D4CFD800F0926E /* BaseTableViewCell.swift */; };
 		D3B8116A22D4D5F900F0926E /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B8116922D4D5F900F0926E /* BaseCollectionViewCell.swift */; };
+		D3B8118A22D62C5500F0926E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B8118922D62C5400F0926E /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		D3B8116422D3FEDB00F0926E /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		D3B8116722D4CFD800F0926E /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		D3B8116922D4D5F900F0926E /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		D3B8118922D62C5400F0926E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E864EB24D95A8723E4FB8B80 /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -123,6 +125,7 @@
 				D3B8113D22D3073500F0926E /* Movie.swift */,
 				D3B8113F22D30BA200F0926E /* MovieList.swift */,
 				D3B8116422D3FEDB00F0926E /* Filter.swift */,
+				D3B8118922D62C5400F0926E /* Card.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				D3B8115E22D3FA6700F0926E /* ViewModel.swift in Sources */,
 				D3B8114C22D3ED2700F0926E /* FiltersTableViewCell.swift in Sources */,
 				D3B8113E22D3073500F0926E /* Movie.swift in Sources */,
+				D3B8118A22D62C5500F0926E /* Card.swift in Sources */,
 				D3B8115022D3ED4600F0926E /* MoviesTableViewCell.swift in Sources */,
 				D3B8115822D3F15B00F0926E /* MovieCollectionViewCell.swift in Sources */,
 				D3B8115C22D3F1F800F0926E /* Constant.swift in Sources */,

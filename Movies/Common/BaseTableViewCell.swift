@@ -10,39 +10,31 @@ import UIKit
 
 class BaseTableViewCell: UITableViewCell {
 
-    /*
-    private var cardWidth: CGFloat = 0.0
-    private var cardHeight: CGFloat = 0.0
+    private var cards: [Card]?
     private var space: CGFloat = 0.0
-     */
     
     func configureCell(with any: Any) {
         // implementation provided by subclass
     }
 
-    /*
-    func setupGrid(with cardWidth: CGFloat, _ cardHeight: CGFloat, _ space: CGFloat) {
-        self.cardWidth = cardWidth
-        self.cardHeight = cardHeight
+    func setupGrid(with cards: [Card], _ space: CGFloat) {
+        self.cards = cards
         self.space = space
     }
-     */
  
-    class func getIdentifier() -> String
-    {
+    class func getIdentifier() -> String {
         return String(describing: self)
     }
     
 }
 
-/*
 // MARK: - UICollectionViewDelegateFlowLayout -
 extension BaseTableViewCell: UICollectionViewDelegateFlowLayout
 {
     // set cell's size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width: cardWidth, height: cardHeight)
+        return CGSize(width: cards?[indexPath.row].width ?? 0.0, height: cards?[indexPath.row].height ?? 0.0)
     }
     
     // set collection view's margins
@@ -63,4 +55,3 @@ extension BaseTableViewCell: UICollectionViewDelegateFlowLayout
         return space
     }
 }
-*/

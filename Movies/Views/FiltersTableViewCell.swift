@@ -18,20 +18,32 @@ class FiltersTableViewCell: BaseTableViewCell {
     
     weak var delegate: FiltersTableViewCellDelegate?
     
-    private var filters: [Filter] = []
-    
+    private var filters: [Filter] = [] {
+        didSet {
+            var cards: [Card] = []
+            
+            for filter in filters {
+                let sizingLabel = UILabel()
+                sizingLabel.text = filter.name
+                sizingLabel.font = UIFont.systemFont(ofSize: 15)
+
+                let cardWidth: CGFloat = sizingLabel.intrinsicContentSize.width + filterButtonPadding
+                let cardHeight: CGFloat = 50.0
+
+                let card = Card(width: cardWidth, height: cardHeight)
+                cards.append(card)
+            }
+            
+            self.setupGrid(with: cards, space)
+        }
+    }
     private let filterButtonPadding: CGFloat = 16.0
     private let space: CGFloat = 10.0
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupCollectionView()
-    }
-    
     override func configureCell(with any: Any) {
         if let filtersSection = any as? FiltersSection {
             self.filters = filtersSection.filters
-            collectionView.reloadData()
+            setupCollectionView()
         }
     }
     
@@ -62,40 +74,5 @@ extension FiltersTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.userDidSelectFilter(filters[indexPath.row].type, for: self)
-    }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout -
-extension FiltersTableViewCell: UICollectionViewDelegateFlowLayout
-{
-    // set cell's size
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
-        let sizingLabel = UILabel()
-        sizingLabel.text = filters[indexPath.row].name
-        sizingLabel.font = UIFont.systemFont(ofSize: 15)
-        
-        let cardWidth: CGFloat = sizingLabel.intrinsicContentSize.width + filterButtonPadding
-        let cardHeight: CGFloat = 50.0
-        
-        return CGSize(width: cardWidth, height: cardHeight)
-    }
-    
-    // set collection view's margins
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
-    {
-        return UIEdgeInsets(top: space, left: space, bottom: space, right: space)
-    }
-    
-    // set vertical padding
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
-    {
-        return space
-    }
-    
-    // set horizontal padding
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
-    {
-        return space
     }
 }
