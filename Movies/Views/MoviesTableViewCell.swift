@@ -64,7 +64,7 @@ extension MoviesTableViewCell: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         let cardWidth = Int((collectionView.bounds.width - 4 * 10) / 3)
-        let cardHeight = Int((collectionView.bounds.height - 3 * 10) / 2)
+        let cardHeight = 300 //Int((collectionView.bounds.height - 3 * 10) / 2)
 
         return CGSize(width: cardWidth, height: cardHeight)
     }

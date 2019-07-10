@@ -20,7 +20,7 @@ struct Movie {
     var imageURL: URL? {
         var url: URL?
         if let posterPath = self.poster {
-            url = URL(fileURLWithPath: baseURL + imageSize + posterPath)
+            url = URL(string: baseURL + imageSize + posterPath)
         }
         return url
     }

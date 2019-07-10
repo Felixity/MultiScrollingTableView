@@ -14,6 +14,12 @@ class MovieCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        posterImageView.layer.cornerRadius = 8
+        posterImageView.layer.masksToBounds = true
+    }
+    
     override func configureCell(with anyData: Any?) {
         if let movie = anyData as? Movie {
             // reset all existing info
@@ -21,8 +27,9 @@ class MovieCollectionViewCell: BaseCollectionViewCell {
             titleLabel.text = nil
             
             // download image
-            
-            print(movie.imageURL?.absoluteString)
+            if let imageURL = movie.imageURL {
+                posterImageView.af_setImage(withURL: imageURL)
+            }
             titleLabel.text = movie.title
         }
     }
