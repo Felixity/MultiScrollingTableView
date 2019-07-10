@@ -9,7 +9,7 @@
 import Foundation
 
 private let baseURL = "https://image.tmdb.org/t/p/"
-private let imageSize = "w200/"
+private let imageSize = "w200"
 
 struct Movie {
     fileprivate(set) var id: Int

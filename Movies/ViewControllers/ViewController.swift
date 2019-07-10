@@ -14,6 +14,10 @@ class ViewController: UIViewController {
     
     var sections: [Section] = []
     
+    private var hasMorePages = true
+    private var isFetchInProgress = false
+    private var currentPage = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
